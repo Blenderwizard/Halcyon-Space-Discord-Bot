@@ -1,0 +1,15 @@
+{
+  "name": "Halycon-Space-Discord-Bot",
+  "description": "A Discord Bot developed for the HS Clan Discord Server",
+  "repository": "https://github.com/Blenderwizard/Halcyon-Space-Discord-Bot",
+  "env": {
+    "DB_URI": {
+      "description": "The URI Given by mongodb to connect to the database",
+      "value": "mongodb+srv://<USERNAME>:<PASSWORD>@<ClusterName>.ju5pb.mongodb.net/hsreactrolls?retryWrites=true&w=majority"
+    },
+    "DISCORD_TOKEN": {
+      "description": "The Discord Bot Token",
+      "value": "Replace This"
+    }
+  }
+}
