@@ -5,6 +5,7 @@ This is a small bot created for the [Halcyon Space Destiny 2 Clan](https://www.b
 
 ## Requirements
 This bot requires a mongodb database. The env variable named DB_URI takes the Mongodb database uri.
+
 For the bot token, the env variable named DISCORD_TOKEN takes the discord bot token
 
 ## Commands
