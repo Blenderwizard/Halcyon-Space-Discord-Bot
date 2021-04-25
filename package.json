@@ -1,0 +1,19 @@
+{
+  "name": "hs-discord-bot",
+  "version": "0.0.0",
+  "description": "HsDiscordBot",
+  "main": "app.js",
+  "author": {
+    "name": "Blenderwizard"
+  },
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "mongoose": "^5.12.5"
+  },
+  "engines": {
+    "node": "12.X"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}
