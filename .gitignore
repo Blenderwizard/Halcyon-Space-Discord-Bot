@@ -3,3 +3,4 @@ bin
 obj
 HsDiscordBot.njsproj
 .env
+package-lock.json
