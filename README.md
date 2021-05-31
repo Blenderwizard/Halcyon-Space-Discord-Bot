@@ -16,3 +16,11 @@ Creates a react message using the message id, the first emoji will grant the fir
 > .createRMO [Channel ID] [Message ID] [Emoji Name 1] [Role Name 1] ... [Emoji Name N] [Role Name N]
 
 Creates a react message in another channel using the message id, the first emoji will grant the first role and so forth.
+
+> .editRM [Message ID] add [Emoji Name 1] [Role Name 1] ... [Emoji name N] [Role Name N]
+
+Edits an existing react message and adds more reactions to the specified reactions.
+
+> .editRM [Message ID] remove [Emoji Name 1] ... [Emoji name N]
+
+Edits an existing react message and removes all specified emojies from the specified reaction message.
