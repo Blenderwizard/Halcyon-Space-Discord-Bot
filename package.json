@@ -1,7 +1,7 @@
 {
-  "name": "Halycon-Space-Discord-Bot",
+  "name": "React-Roles-Discord-Bot",
   "version": "0.9.1",
-  "description": "A Discord Bot developed for the HS Clan Discord Server",
+  "description": "A Discord Bot developed to give roles by reacting to a determined message.",
   "main": "app.js",
   "author": {
     "name": "Blenderwizard"
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Blenderwizard/Halcyon-Space-Discord-Bot"
+    "url": "https://github.com/Blenderwizard/React-Roles-for-Discord"
   },
   "license": "MIT",
   "devDependencies": {}
