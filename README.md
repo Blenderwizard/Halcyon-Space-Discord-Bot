@@ -1,7 +1,5 @@
-# Halcyon Space Discord Bot
+# React Roles for Discord Bot
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-This is a small bot created for the [Halcyon Space Destiny 2 Clan](https://www.bungie.net/en/ClanV2?groupid=4371365) Discord.
 
 ## Requirements
 This bot requires a mongodb database. The env variable named DB_URI takes the Mongodb database uri.
