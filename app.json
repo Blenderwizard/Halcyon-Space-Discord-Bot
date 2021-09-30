@@ -1,7 +1,7 @@
 {
-  "name": "Halycon-Space-Discord-Bot",
-  "description": "A Discord Bot developed for the HS Clan Discord Server",
-  "repository": "https://github.com/Blenderwizard/Halcyon-Space-Discord-Bot",
+  "name": "React-Roles-Discord-Bot",
+  "description": "A Discord Bot to give roles on a reaction to a specified message.",
+  "repository": "https://github.com/Blenderwizard/React-Roles-for-Discord",
   "env": {
     "DB_URI": {
       "description": "The URI Given by mongodb to connect to the database",
