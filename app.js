@@ -13,8 +13,8 @@ console.log("Defining message schema ...")
 const messageSchema = new Schema({
     message: String,
     messageID: String,
-    messageReacts: [String], //This uses ids, safe to change emoji names.
-    messageRoles: [String] //This uses ids, safe to change the name of roles.
+    messageReacts: [String], //This uses ids, safe to change emoji names after command is run.
+    messageRoles: [String] //This uses ids, safe to change the name of roles after command is run.
 });
 
 //Creating an object from the schema
@@ -43,8 +43,71 @@ db.once('open', function () {
         if (message.author.bot) return;
         if (!message.toString().startsWith('.')) return;
         let command = message.toString().substring(1, message.toString().length).split(" ");
-        // Creating a reactmessage within the same channel --> messageID {emojiname rolename (repeated)}
-        if (command[0] === "createRM") {
+        // Shows help info for other commands.
+        if (command[0] === "help") {
+            if (command.length > 1) {
+                if (command[1] === "createRM") {
+                    message.channel.send("\
+                        ```\
+Command Name: createRM \n\
+Permissions Required: ADMINISTRATOR\n\n\
+Format:\n\
+.createRM [Message ID] [Emoji Name 1] [Role Name 1] ... [Emoji Name N] [Role Name N]\n\n\
+Information:\n\
+    This command creates a ReactMessage using the Message ID passed as an argument, the target message must be within the same channel\n\
+that the command was called in.The bot will react in order of what was passed to it. Rolenames can't have spaces in them, but since the\n\
+bot stores both Emojis and Roles as IDs, it is safe to rename them after the command is finished.\n\
+```"
+                    );
+                }
+                else if (command[1] === "createRMO") {
+                    message.channel.send("\
+                        ```\
+Command Name: createRMO \n\
+Permissions Required: ADMINISTRATOR\n\n\
+Format:\n\
+.createRMO [Message ID] [Message ID] [Emoji Name 1] [Role Name 1] ... [Emoji Name N] [Role Name N]\n\n\
+Information:\n\
+    This command creates a ReactMessage using the Message ID passed as an argument, the target message must be within the same channel\n\
+that the channel ID that was passed.The bot will react in order of what was passed to it. Rolenames can't have spaces in them, but since\n\
+the bot stores both Emojis and Roles as IDs, it is safe to rename them after the command is finished.\n\
+```"
+                    );
+                }
+                else if (command[1] === "editRM") {
+                    message.channel.send("\
+                        ```\
+Command Name: editRM \n\
+Permissions Required: ADMINISTRATOR\n\n\
+Format:\n\
+.editRM [Message ID] add [Emoji Name 1] [Role Name 1] ... [Emoji name N] [Role Name N]\n\
+.editRM [Message ID] remove [Emoji Name 1] ... [Emoji name N]\n\n\
+Information:\n\
+    This command edits an existing ReactMessage using the Message ID passed as an argument, the target message must be within the same\n\
+channel that the command was called in. The add argument will append reactions to the message in the order they are passed. Rolenames\n\
+can't have spaces in them, but since the bot stores both Emojis and Roles as IDs, it is safe to rename them after the command is finished.\n\
+The remove argument removes the specified Emoji and makes it that reacting using that Emoji no longer gives the Role to the User reacting.\n\
+```"
+                    );
+                }
+            }
+            else {
+                message.channel.send("\
+                    ```\
+.help\n\
+    Shows this information, can be used with another command as an argument to show more information about it.\n\n\
+.createRM\n\
+    Creates a ReactMessage with a specified message id, will only look for a coresponding message within the channel the command was called.\n\n\
+.createRMO\n\
+    Creates a ReactMessage using a specified channel ID and a message ID.\n\n\
+.editRM\n\
+    Allows to add or remove reactions on a existing message, must be called in the same channel the ReactMessage exists..\
+```"
+                );
+            }
+        }
+        // Create a reactmessage within the same channel, you will need the messageID. --> messageID {emojiname rolename (repeated)}
+        else if (command[0] === "createRM") {
             if (!message.member.hasPermission('ADMINISTRATOR')) return;
             if (command.length % 2 !== 0) return;
             try {
@@ -73,7 +136,9 @@ db.once('open', function () {
                 console.log(err);
             }
             // Creating a react message outside of the channel --> channelID messageID {emojiname rolename (repeated)}
-        } else if (command[0] === "createRMO") {
+        }
+        // Create a reactmessage outside of the same channel by specifiying channel ID. --> channelID messageID {emojiname rolename (repeated)}
+        else if (command[0] === "createRMO") {
             if (!message.member.hasPermission('ADMINISTRATOR')) return;
             if (command.length % 2 !== 1) return;
             try {
@@ -103,7 +168,9 @@ db.once('open', function () {
                 console.log(err);
             }
             // Editing a react message inside of the channel --> messageID {add or remove} {if (add) {emojiname rolename (repeated)}, if (remove) {emojiname (repeated}}
-        } else if (command[0] === "editRM") {
+        }
+        // Allows to add and remove reactions to track on a created reactmessage, look at help for more info on the command.
+        else if (command[0] === "editRM") {
             if (!message.member.hasPermission('ADMINISTRATOR')) return;
             try {
                 let messageID = command[1];
@@ -185,7 +252,7 @@ db.once('open', function () {
                 if (err) return handleError(err);
                 if (messages == null) return;
                 if (user.bot) return;
-                console.log(`${user.user.tag} added a reaction from a message found within the database`);
+                console.log(`${user.user.tag} added a reaction to a message found within the database`);
                 for (let i = 0; i < messages.messageReacts.length; i++) {
                     if (messages.messageReacts[i] === (emoji)) {
                         if (!user.roles.cache.has(messages.messageRoles[i])) {

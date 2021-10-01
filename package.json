@@ -1,6 +1,6 @@
 {
   "name": "React-Roles-Discord-Bot",
-  "version": "0.9.1",
+  "version": "1.0.0",
   "description": "A Discord Bot developed to give roles by reacting to a determined message.",
   "main": "app.js",
   "author": {
